@@ -12,7 +12,7 @@ plugins:
 # Configuracion visual
 color_scheme: ibero
 search_enabled: true
-heading_anchors: true
+heading_anchors: false
 nav_enabled: true
 
 # GitHub Pages
