@@ -1,3 +1,6 @@
+---
+nav_exclude: true
+---
 # Guía rápida de publicación
 
 Este paquete es un sitio de documentación, no sustituye al código de control. El repositorio técnico del compañero queda enlazado.
