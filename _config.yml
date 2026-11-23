@@ -1,0 +1,16 @@
+title: "IBERO | Control Inteligente"
+description: "Proyecto Final — Equipo 3, Péndulo 2, QUBE-Servo 3"
+theme: just-the-docs
+color_scheme: ibero
+url: "https://vmolvera.github.io"
+baseurl: "/Proyecto_Final_Control_Inteligente"
+search_enabled: true
+heading_anchors: true
+nav_enabled: true
+aux_links:
+  "Código del equipo":
+    - "https://github.com/sebastiux/cubeservoquansecontrol"
+  "Repositorio de entrega":
+    - "https://github.com/vmolvera/Proyecto_Final_Control_Inteligente"
+aux_links_new_tab: true
+gh_edit_link: false
