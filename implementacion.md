@@ -15,7 +15,7 @@ El modelo utiliza el estado $x=[\theta,\alpha,\dot{\theta},\dot{\alpha}]^T$ y la
 
 $$\tau=\frac{k_m}{R_m}\left(V_m-k_m\dot{\theta}\right).$$
 
-El modelo de Python integra la planta con Runge–Kutta de cuarto orden a **2 ms**. El agente selecciona una acción cada **10 ms**, de modo que el voltaje se mantiene durante cinco pasos de integración. Como comprobación del modelo, el código compara la linealización numérica alrededor de $x=0$, $u=0$ con las matrices $A$ y $B$ del LQR de referencia. La comprobación cubre la coherencia local del modelo. La correspondencia con la planta fuera de ese punto requiere mediciones experimentales.
+El modelo de Python integra la planta con Runge–Kutta de cuarto orden a **2 ms**. El agente selecciona una acción cada **10 ms**, de modo que el voltaje se mantiene durante cinco pasos de integración. Como comprobación del modelo, el código compara la linealización numérica alrededor de $x=0$, $u=0$ con las matrices $A$ y $B$ del LQR de referencia. La comprobación cubre la coherencia local del modelo.
 
 ### Cálculo de las aceleraciones
 
@@ -43,8 +43,6 @@ El voltaje actúa sobre la ecuación del brazo a través de $\tau$. El término 
 
 ### Parámetros de la planta
 
-El Cuadro 2 recoge los valores de referencia de la consigna. La segunda columna numérica identifica los parámetros base que utilizaron el simulador de balance y el script MATLAB del controlador de referencia. Conviene mantener ambos conjuntos identificados al reproducir una prueba, porque las diferencias en resistencia y amortiguamiento cambian la predicción del movimiento.
-
 | Parámetro | Símbolo | Cuadro 2 | Simulador de balance | Unidad |
 |---|---|---:|---:|---|
 | Resistencia de armadura | $R_m$ | 8.4 | 7.5 | Ω |
@@ -56,8 +54,6 @@ El Cuadro 2 recoge los valores de referencia de la consigna. La segunda columna 
 | Amortiguamiento del brazo | $D_r$ | 0.0015 | 0.001 | N·m·s/rad |
 | Amortiguamiento del péndulo | $D_p$ | 0.0005 | 0.00005 | N·m·s/rad |
 | Aceleración gravitatoria | $g$ | 9.81 | 9.81 | m/s² |
-
-El Cuadro 2 emplea inercias de barra respecto de su centro de masa. El código de balance calcula $J_r=m_rL_r^2/3$ y $J_p=m_pL_p^2/3$ respecto del pivote y las utiliza en su propia matriz de dinámica. Al cambiar de modelo o variar masas y longitudes, las inercias se recalculan de acuerdo con la formulación correspondiente.
 
 ### Referencia lineal y comprobación del equilibrio
 
@@ -109,7 +105,7 @@ La prueba A1 usa RK4 para la planta y Euler para el observador. El voltaje queda
 
 ### A2. Construcción del modelo virtual en Simulink
 
-`construir_entorno_pruebas.m` genera `qube_dqn_pruebas.slx`. El subsistema **Qube simulado (sin QUARC)** integra la dinámica y entrega tanto el estado real del simulador como el estado observado. El resto del diagrama conecta la observación con la política y devuelve a la planta el voltaje habilitado.
+`construir_entorno_pruebas.m` genera `qube_dqn_pruebas.slx`. El subsistema integra la dinámica y entrega tanto el estado real del simulador como el estado observado. El resto del diagrama conecta la observación con la política y devuelve a la planta el voltaje habilitado.
 
 ![Vista previa del modelo A2 con la planta virtual, el retenedor, la red DQN, el habilitador y los registros]({{ '/assets/images/qube-simulink-a2.png' | relative_url }})
 
@@ -125,22 +121,8 @@ La prueba A1 usa RK4 para la planta y Euler para el observador. El voltaje queda
 
 El archivo A2 usa `ode4` a paso fijo, con $T_s=2$ ms y una duración configurada de 10 s. El vector inicial por defecto es $x_0=[0,10^\circ,0,0]^T$, con los ángulos internamente en radianes. A2 reproduce los bloques del lazo y su habilitación. A1 y A2 se comparan documentando el integrador, la condición inicial y el origen de cada señal.
 
-## 4.4 Transferencia al QUBE-Servo 3
+## 4.4 Integración de levantamiento y balance
 
-La copia de laboratorio conserva QUARC, los encoders, los observadores y el habilitador angular del modelo de balance. El bloque LQR se sustituyó por la política DQN. Un retenedor fija el periodo de decisión y un bloque de transición de tasa lleva la salida al paso de ejecución del modelo. El LQR original se conservó como referencia experimental.
-
-En el ensayo físico inicial, el péndulo se colocó manualmente cerca de la vertical invertida. Con el DQN, el brazo osciló rápidamente y el equilibrio no se sostuvo. El diagnóstico requiere comparar las señales estimadas y el voltaje aplicado, y revisar los transitorios del observador, la saturación y el tiempo real de ejecución. La evidencia disponible no establece una causa única.
-
-La señal $X$ de **Qube With Pendulum** se conecta directamente al bloque que muestrea las entradas del DQN. El camino original del LQR incluía una resta respecto a la referencia seguida de una ganancia. En la copia neuronal se retiró ese camino para que el signo de $X$ coincidiera con la convención de entrenamiento. La salida de la red se dirige al selector de balance después de la transición de tasa. Esta conexión conserva la diferencia entre **solicitar un voltaje** y **habilitarlo en la salida del modelo**.
-
-Para comparar un ensayo físico con la simulación interesa registrar el vector $X$ que recibió la red, la acción seleccionada, la señal de habilitación y el voltaje aplicado. Si el voltaje alterna entre acciones aun cuando el ángulo cambia poco, el registro de las velocidades estimadas ayuda a distinguir una decisión sensible al estado de un corte de la lógica de habilitación.
-
-## 4.5 Integración de levantamiento y balance
-
-La extensión de simulación usa dos políticas. El agente de *swing-up* lleva el péndulo desde la posición colgante hacia la región de captura. El supervisor selecciona la política de balance cuando el ángulo y la velocidad angular del péndulo cumplen las condiciones de captura y el brazo permanece dentro de su margen de movimiento. El habilitador angular del controlador de balance de laboratorio no cumple la función de ese supervisor.
-
-Para validar la secuencia conjunta se requiere registrar el instante de captura, el modo activo, $\theta(t)$, $\alpha(t)$, las velocidades estimadas y $V_m(t)$. La transferencia física documentada corresponde al agente de balance. La validación de la secuencia completa en el QUBE-Servo 3 queda pendiente.
+La extensión de simulación usa dos políticas. El agente de *swing-up* lleva el péndulo desde la posición colgante hacia la región de captura. El supervisor selecciona la política de balance cuando el ángulo y la velocidad angular del péndulo cumplen las condiciones de captura y el brazo permanece dentro de su margen de movimiento.
 
 El diseño del modelo conjunto conserva un estado físico común y construye dos observaciones a partir de él. El agente de levantamiento recibe una codificación periódica del ángulo del péndulo. El agente de balance recibe $\alpha$ referido a la vertical invertida. La conmutación cambia la política que calcula $V_m$ y conserva el estado de la planta y de los observadores durante la transición.
-
-[Continuar a Agentes DQN]({{ '/dqn.html' | relative_url }})
