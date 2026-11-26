@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "9. Código fuente"
-nav_order: 10
+title: "7. Código fuente"
+nav_order: 8
 ---
-# 9. Código fuente y reproducibilidad
+# 7. Código fuente y reproducibilidad
 
 ## Repositorios
 

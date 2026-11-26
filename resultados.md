@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "7. Resultados"
-nav_order: 8
+title: "6. Resultados"
+nav_order: 7
 ---
-# 7. Resultados de simulación y experimentales
+# 6. Resultados de simulación y experimentales
 
 ## Resultados publicados en el repositorio del equipo
 

@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "10. Conclusiones"
-nav_order: 11
+title: "8. Conclusiones"
+nav_order: 9
 ---
-# 10. Conclusiones y trabajo pendiente
+# 8. Conclusiones y trabajo pendiente
 
 Se dispone de un controlador LQR que sirvió como referencia física, de un modelo no lineal y de una política DQN de balance con resultados de simulación publicados en el repositorio del equipo. La integración DQN en el QUBE-Servo 3 real no consiguió mantener la posición invertida durante el ensayo inicial.
 

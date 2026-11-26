@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "11. Referencias"
-nav_order: 12
+title: "9. Referencias"
+nav_order: 10
 ---
-# 11. Referencias
+# 9. Referencias
 
 1. López González, A. y Caballero Mora, J. A., *Proyecto Final – Control Inteligente*, Universidad Iberoamericana, 29 de octubre de 2026 (enunciado de la asignatura, documento facilitado al equipo).
 2. Repositorio técnico del equipo: [sebastiux/cubeservoquansecontrol](https://github.com/sebastiux/cubeservoquansecontrol).
