@@ -61,6 +61,24 @@ El **DQN de balance** utiliza los ángulos y las velocidades angulares del brazo
 
 ---
 
+## Resultados principales
+
+El sistema se evaluó mediante pruebas de simulación, análisis de robustez y experimentos sobre la planta física.
+
+| Prueba | Resultado reportado |
+|---|---:|
+| Comparación de decisiones MATLAB–Python | 0 diferencias en 200 estados |
+| Validación durante el entrenamiento en Python | 98.8 % de éxito |
+| Monte Carlo en MATLAB | 99.6 % de éxito |
+| Número de escenarios Monte Carlo | 500 |
+| Variación paramétrica de esa evaluación | ±15 % |
+| Estabilización desde $\alpha_0=10^\circ$ | Menos de 1s |
+| Recuperación ante perturbación de velocidad | Menos de 1s |
+
+Estos resultados corresponden a las pruebas de simulación documentadas en el repositorio técnico y no deben interpretarse como porcentajes de éxito experimental en el QUBE físico.
+
+---
+
 ## Integrantes
 
 - Carlos Sebastián Ortega Hernández
