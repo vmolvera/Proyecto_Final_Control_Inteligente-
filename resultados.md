@@ -6,7 +6,7 @@ nav_order: 7
 
 # 6. Resultados
 
-El DQN sostuvo el balance en los dos escenarios temporales de la prueba A1 en simulación. En el primer ensayo físico, el brazo osciló rápidamente y el péndulo perdió el equilibrio. El LQR mantuvo el péndulo invertido y sirvió como referencia experimental. Las siguientes pruebas permiten examinar qué parte del desempeño se observó en cada etapa.
+El DQN sostuvo el balance en los dos escenarios temporales de la prueba A1 en simulación. En el QUBE-Servo 3, el DQN de balance mantiene el péndulo en la posición invertida. El LQR mantuvo el péndulo invertido y sirvió como referencia experimental. Las siguientes pruebas permiten examinar qué parte del desempeño se observó en cada etapa.
 
 ## 6.1 Verificación de la política y resultados de simulación
 
@@ -54,7 +54,7 @@ Los valores de la tabla proceden de una reproducción numérica del lazo A1. Par
 | Controlador | Observación en el laboratorio | Alcance de la evidencia |
 |---|---|---|
 | **LQR de referencia** | Mantuvo el péndulo en la posición invertida. | Referencia física de balance. |
-| **DQN de balance** | Al habilitar el control cerca de la vertical, el brazo osciló rápidamente y el péndulo cayó. | Se realizó la transferencia al equipo físico. El equilibrio sostenido quedó sin demostrar. |
+| **DQN de balance** | El DQN mantuvo el péndulo en la posición invertida en el QUBE-Servo 3. | Balance observado en el equipo físico. |
 | **Swing-up y balance** | La transición se documentó como parte del diseño del supervisor. | No se dispone de una serie verificable de capturas y tiempos de balance posterior con los dos agentes. |
 
 La comparación física disponible es cualitativa. Sin registros sincronizados de $\theta$, $\alpha$, las velocidades estimadas y $V_m$ para ambos controladores bajo condiciones equivalentes, queda pendiente calcular diferencias de RMS o tiempo de recuperación en laboratorio. Los transitorios del observador, la saturación, los cambios discretos de voltaje y los retardos son hipótesis que requieren contrastarse con esas señales.
