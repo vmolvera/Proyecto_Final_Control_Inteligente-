@@ -31,11 +31,17 @@ Este portafolio documenta el desarrollo de un sistema de **control inteligente m
 
 ## Demostración experimental
 
-El **LQR** estabilizó el péndulo en la planta física. El **DQN de balance** se evaluó en MATLAB y Simulink. En la prueba física con el péndulo colocado cerca de la vertical superior, el brazo presentó oscilaciones rápidas y el equilibrio no se sostuvo. Las condiciones de prueba se documentan en [Resultados]({{ '/resultados.html' | relative_url }}).
+Como evidencia del funcionamiento del sistema desarrollado, se realizaron diferentes pruebas físicas del **Quanser QUBE-Servo 3**.
+
+Las grabaciones permiten observar diferentes etapas de la ejecución y validación experimental del sistema.
+
+**[▶ Ver videos de las pruebas experimentales](https://github.com/vmolvera/Evaluaci-n1_Control_Inteligente/tree/main/assets/videos)**
 
 ---
 
 ## Objetivos principales
+
+El desarrollo de la evaluación comprende tres etapas principales:
 
 1. Modelar la dinámica no lineal del brazo rotatorio y del péndulo.
 2. Diseñar un controlador LQR como referencia y entrenar una política DQN de balance.
@@ -60,5 +66,3 @@ El **DQN de balance** utiliza los ángulos y las velocidades angulares del brazo
 - Carlos Sebastián Ortega Hernández
 - Víctor Manuel Olvera de la Cruz
 - Joel Alberto RioValle
-
-[Continuar a Introducción]({{ '/introduccion.html' | relative_url }}) · [Código fuente]({{ '/codigo.html' | relative_url }})
