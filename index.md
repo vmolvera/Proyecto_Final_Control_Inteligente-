@@ -1,24 +1,22 @@
-
 ---
 layout: default
 title: Inicio
 nav_order: 1
-permalink: /
 ---
 
-# Control inteligente del péndulo invertido
+# Entrenamiento planta altamente no lineal por DQN
 
 ## Proyecto Final - Control Inteligente
 
-**Quanser QUBE-Servo 3 · Equipo 3 · Péndulo 2 · Otoño 2026**
+**Quanser QUBE-Servo 3 · Equipo 3 · Péndulo 2**
 
-Este portafolio digital documenta el desarrollo, implementación y evaluación de un sistema de **Control Inteligente mediante Aprendizaje por Refuerzo Profundo (Deep Reinforcement Learning)** aplicado al péndulo rotatorio invertido **Quanser QUBE-Servo 3**.
+Este portafolio digital documenta el desarrollo, implementación y evaluación experimental de un sistema **mediante Aprendizaje por Refuerzo Profundo** aplicado a un péndulo invertido **Quanser QUBE-Servo 3**.
 
-El proyecto se centra en el diseño de un controlador neuronal basado en **Deep Q-Network (DQN)**, capaz de seleccionar acciones de control para mantener el péndulo cerca de su posición vertical invertida, mientras regula el movimiento del brazo rotatorio.
+El proyecto integra el **modelado dinámico no lineal del péndulo**, el diseño de un **controlador de referencia LQR**, la estimación de estados mediante observadores y el entrenamiento de una **red neuronal Deep Q-Network (DQN)** orientada a mantener el péndulo en su posición vertical invertida.
 
-El desarrollo comprende el modelado dinámico del sistema, la formulación del problema de aprendizaje, el entrenamiento de redes neuronales, la evaluación mediante simulación y la integración del controlador con la planta física utilizando **Python, MATLAB, Simulink y Quanser QUARC**.
+La implementación se desarrolló mediante **Python, MATLAB y Simulink**, utilizando **Quanser QUARC** para conectar los controladores con la planta física. Como ampliación, se desarrollaron diferentes versiones de una política neuronal de **levantamiento autónomo (Swing-Up)**, capaces de generar acciones para trasladar el péndulo desde su posición colgante hacia la región de equilibrio.
 
-Adicionalmente, se estudia el **levantamiento autónomo del péndulo (Swing-Up)** mediante políticas neuronales, así como la transición hacia el control de equilibrio. Las distintas versiones desarrolladas permiten analizar la influencia del modelo dinámico, las perturbaciones, los retardos y el filtrado de la señal de control.
+El trabajo permite estudiar el comportamiento de los controladores neuronales, sus condiciones de estabilidad, la influencia de los parámetros físicos y las diferencias entre los resultados obtenidos en simulación y en el sistema real.
 
 ---
 
@@ -26,38 +24,38 @@ Adicionalmente, se estudia el **levantamiento autónomo del péndulo (Swing-Up)*
 
 | Elemento | Información |
 |---|---|
-| Universidad | Universidad Iberoamericana Ciudad de México |
 | Asignatura | Control Inteligente |
-| Evaluación | Proyecto Final - Aprendizaje por Refuerzo |
+| Evaluación | Proyecto Final |
 | Equipo | Equipo 3 |
 | Planta asignada | Péndulo 2 |
 | Plataforma | Quanser QUBE-Servo 3 |
-| Sistema | Péndulo rotatorio invertido |
-| Técnica principal | Deep Q-Network (DQN) |
-| Controlador de referencia | Regulador Lineal Cuadrático (LQR) |
+| Técnica de control inteligente | Deep Q-Network (DQN) |
 | Desarrollo | Python, MATLAB y Simulink |
-| Implementación física | Quanser QUARC |
 | Periodo | Otoño 2026 |
+
+---
+
+## Demostración experimental
+
+Como parte de la evaluación del sistema, se realizaron pruebas de simulación y experimentales sobre el **Quanser QUBE-Servo 3**, con el propósito de analizar la capacidad de los controladores para mantener el equilibrio del péndulo y estudiar el levantamiento autónomo.
+
+Las pruebas comprenden:
+
+- **Controlador LQR:** Estabilización del péndulo físico mediante realimentación de estados.
+- **DQN Balance:** Evaluación del controlador neuronal en MATLAB, Simulink y el equipo físico.
+- **DQN Swing-Up:** Desarrollo y evaluación de políticas de levantamiento autónomo, con diferentes configuraciones de entrenamiento, robustez y filtrado.
 
 ---
 
 ## Objetivos principales
 
-El objetivo general del proyecto es **diseñar, entrenar y evaluar un agente de aprendizaje por refuerzo profundo para estabilizar el péndulo rotatorio invertido**, utilizando un modelo dinámico no lineal y evaluando su comportamiento tanto en simulación como en la planta física.
+El desarrollo del proyecto comprende cinco etapas principales:
 
-Para alcanzarlo se consideran las siguientes etapas:
-
-1. **Modelado dinámico:** implementar y validar las ecuaciones que describen el comportamiento del QUBE-Servo 3.
-
-2. **Diseño del agente DQN:** definir estados, acciones, función de recompensa, arquitectura neuronal y parámetros de entrenamiento.
-
-3. **Entrenamiento y simulación:** desarrollar una política de control y evaluar su capacidad para mantener el equilibrio ante distintas condiciones iniciales y perturbaciones.
-
-4. **Implementación experimental:** integrar la red entrenada con Simulink y Quanser QUARC para estudiar su desempeño en la planta física.
-
-5. **Análisis de robustez:** evaluar las variaciones paramétricas, las limitaciones del modelo y las diferencias entre simulación y realidad.
-
-6. **Levantamiento autónomo:** desarrollar y evaluar políticas Swing-Up capaces de trasladar el péndulo desde la posición colgante hacia la región invertida.
+1. **Modelado matemático del QUBE-Servo 3**, utilizando las ecuaciones dinámicas no lineales que describen el movimiento del brazo rotatorio y del péndulo.
+2. **Diseño e implementación de un controlador LQR de referencia**, para comprobar la estabilidad del sistema y disponer de una base de comparación.
+3. **Diseño, entrenamiento y evaluación de un agente DQN**, capaz de seleccionar acciones de voltaje a partir del estado del sistema para estabilizar el péndulo invertido.
+4. **Implementación y validación experimental**, mediante MATLAB, Simulink y Quanser QUARC, comparando el comportamiento del modelo simulado con la planta física.
+5. **Desarrollo y evaluación de políticas Swing-Up**, orientadas al levantamiento autónomo del péndulo y al mejoramiento de la estabilidad y robustez del control neuronal.
 
 ---
 
@@ -65,119 +63,80 @@ Para alcanzarlo se consideran las siguientes etapas:
 
 El sistema utilizado está compuesto por:
 
-- **Quanser QUBE-Servo 3:** plataforma electromecánica con motor de corriente continua y brazo rotatorio.
-- **Módulo de péndulo:** mecanismo que se mueve por el acoplamiento dinámico con el brazo accionado.
-- **Encoders:** sensores utilizados para obtener las posiciones angulares del brazo y del péndulo.
-- **Observadores de velocidad:** permiten estimar las velocidades angulares necesarias para la realimentación.
-- **Computadora de laboratorio:** utilizada para modelado, simulación y ejecución de los controladores.
-- **MATLAB y Simulink:** herramientas de análisis, simulación y construcción del sistema de control.
-- **Quanser QUARC:** interfaz para la implementación y supervisión del controlador en tiempo real.
-- **Python:** entorno empleado para desarrollar y entrenar las redes neuronales.
-
-El péndulo es un sistema **no lineal, subactuado e inestable en su posición invertida**. El motor actúa directamente sobre el brazo rotatorio, mientras que el movimiento del péndulo se controla indirectamente mediante el acoplamiento entre ambos cuerpos.
-
+- **Quanser QUBE-Servo 3**, como plataforma electromecánica de experimentación.
+- **Brazo rotatorio accionado por un motor de corriente continua**, encargado de generar el movimiento de control.
+- **Péndulo rotatorio**, cuyo movimiento depende del acoplamiento dinámico con el brazo.
+- **Encoders**, para medir las posiciones angulares del brazo y del péndulo.
+- **MATLAB y Simulink**, para modelado, análisis dinámico, implementación y supervisión.
+- **Python**, para el desarrollo y entrenamiento de las redes neuronales DQN.
+  
 ---
 
 ## Arquitectura general del proyecto
 
-El desarrollo parte de la medición de los estados de la planta y utiliza una red neuronal para calcular el voltaje que debe aplicarse al motor.
+El procedimiento desarrollado sigue la secuencia:
 
-```text
-            QUANSER QUBE-SERVO 3
-                     |
-                     v
-          Medición de los ángulos
-             theta y alpha
-                     |
-                     v
-         Estimación de velocidades
-           theta_dot y alpha_dot
-                     |
-                     v
-           Vector de observación
-                     |
-                     v
-            Controlador neuronal
-                     |
-              Acción de control
-                     |
-                     v
-              Motor del QUBE
-                     |
-                     v
-           Nueva respuesta física
-                     |
-               Realimentación
-```
+1. **Quanser QUBE-Servo 3:** Sistema físico y modelo dinámico no lineal.
+2. **Medición de estados:** Adquisición de las posiciones angulares del brazo y del péndulo mediante encoders.
+3. **Estimación de velocidades:** Procesamiento de las mediciones mediante observadores de estado.
+4. **Control neuronal:** Políticas DQN para calcular el voltaje de control.
+   - **DQN Balance:** Estabilización cerca de la posición invertida.
+   - **DQN Swing-Up:** Levantamiento autónomo desde la posición colgante, con diferentes versiones de implementación.
+5. **Aplicación del voltaje:** Accionamiento del motor mediante las señales de control y los límites de seguridad configurados.
+6. **Realimentación:** Adquisición de nuevos estados para calcular las siguientes acciones.
+7. **Validación:** Análisis de los ángulos, voltajes, estabilidad y comportamiento experimental.
 
-Se estudian dos tareas de control:
+La arquitectura de referencia utiliza el vector de estados:
 
-**Estabilización (DQN Balance):** mantener el péndulo próximo a la vertical invertida cuando comienza dentro de una región cercana al equilibrio.
+$$
+X=\begin{bmatrix}
+\theta & \alpha & \dot{\theta} & \dot{\alpha}
+\end{bmatrix}^{T}
+$$
 
-**Levantamiento autónomo (DQN Swing-Up):** generar movimientos del brazo que permitan elevar el péndulo desde su posición colgante. El repositorio técnico del equipo documenta distintas versiones de esta política, con mejoras progresivas en el entrenamiento y filtrado.
+donde $\theta$ representa el ángulo del brazo rotatorio y $\alpha$ el ángulo del péndulo respecto a la posición invertida.
 
-La integración y selección de políticas debe analizarse junto con las condiciones de captura, límites de movimiento y protecciones del sistema.
+El controlador DQN de estabilización recibe estos estados y selecciona una acción entre **11 niveles discretos de voltaje**, con un periodo de decisión de **10 ms**. El modelo utiliza un paso de simulación de **2 ms**.
+
+El desarrollo de Swing-Up incorpora políticas neuronales y estrategias adicionales de tratamiento de señales y robustez. La integración de ambas tareas debe evaluarse considerando las condiciones de captura y las limitaciones físicas del equipo.
 
 ---
 
-## Metodología general
+## Resultados principales
 
-El trabajo se desarrolló siguiendo una secuencia de modelado, diseño, entrenamiento y experimentación.
+El sistema se evaluó mediante pruebas de simulación, análisis de robustez y experimentos sobre la planta física.
 
-| Etapa | Actividad |
-|---|---|
-| 1. Modelado | Obtención de parámetros y representación dinámica |
-| 2. Control de referencia | Diseño y prueba del controlador LQR |
-| 3. Entorno DQN | Construcción del modelo no lineal para entrenamiento |
-| 4. Aprendizaje | Entrenamiento de la política neuronal |
-| 5. Validación | Pruebas en Python, MATLAB y Simulink |
-| 6. Transferencia | Integración del controlador con Quanser QUARC |
-| 7. Mejoras | Evaluación de Swing-Up, robustez y filtrado |
-| 8. Documentación | Comparación de resultados y análisis experimental |
+| Prueba | Resultado reportado |
+|---|---:|
+| Comparación de decisiones MATLAB–Python | 0 diferencias en 200 estados |
+| Validación durante el entrenamiento en Python | 98.8 % de éxito |
+| Monte Carlo en MATLAB | 99.6 % de éxito |
+| Número de escenarios Monte Carlo | 500 |
+| Variación paramétrica de esa evaluación | ±15 % |
+| Estabilización desde $\alpha_0=10^\circ$ | Menos de 1s |
+| Recuperación ante perturbación de velocidad | Menos de 1s |
 
-Cada una de estas etapas se presenta en las secciones del portafolio, incluyendo sus fundamentos, parámetros, archivos y procedimientos de reproducción.
-
----
-
-## Resultados y estado de validación
-
-Durante el proyecto se obtuvieron resultados tanto con el controlador convencional LQR como con las políticas neuronales desarrolladas.
-
-| Evaluación | Estado documentado |
-|---|---|
-| Controlador LQR | Estabilización del péndulo físico comprobada en laboratorio |
-| DQN Balance en MATLAB | Scripts de evaluación ejecutados |
-| DQN Balance en Simulink | Pruebas realizadas sobre el modelo no lineal |
-| DQN Balance físico inicial | Oscilaciones rápidas sin estabilización sostenida |
-| DQN Swing-Up | Versiones de entrenamiento y pruebas descritas en el repositorio técnico |
-| Validación final integrada | Requiere consolidar las evidencias experimentales |
-
-El repositorio técnico del equipo publica resultados adicionales de simulación y pruebas de diferentes versiones Swing-Up. Estas cifras se analizarán en la sección de resultados, distinguiendo los resultados reportados, los reproducidos y los verificados experimentalmente.
-
-El análisis de las diferencias entre simulación y planta real es parte fundamental del proyecto, ya que permite identificar limitaciones del modelo y oportunidades de mejora del controlador.
+Estos resultados corresponden a las pruebas de simulación documentadas en el repositorio técnico y no deben interpretarse como porcentajes de éxito experimental en el QUBE físico.
 
 ---
 
-## Código fuente y reproducibilidad
+## Código y reproducción del proyecto
 
-Los programas del proyecto se encuentran organizados en archivos Python, MATLAB y Simulink.
+El código fuente del proyecto se encuentra organizado en archivos de Python, MATLAB y Simulink, junto con los pesos de las redes neuronales entrenadas.
 
-**[Consultar el repositorio técnico del equipo](https://github.com/sebastiux/cubeservoquansecontrol)**
+**[Repositorio técnico del equipo — Código y modelos](https://github.com/sebastiux/cubeservoquansecontrol)**
+**[Repositorio del portafolio — Documentación](https://github.com/vmolvera/Proyecto_Final_Control_Inteligente-)**
 
-**[Consultar el repositorio de documentación](https://github.com/vmolvera/Proyecto_Final_Control_Inteligente-)**
+En las siguientes secciones se describen los archivos, sus funciones, las herramientas utilizadas y los procedimientos necesarios para reproducir las pruebas de simulación y evaluar los controladores.
 
-El portafolio presenta los procedimientos de instalación, configuración, entrenamiento, simulación y validación, con el propósito de que otro estudiante pueda comprender la implementación y reproducir sus experimentos.
+La reproducción sobre el sistema físico requiere una instalación compatible de Quanser QUARC, comprobación de los límites de actuación y supervisión del laboratorio.
 
 ---
 
 ## Integrantes
 
-**Equipo 3 - Péndulo 2**
+**Equipo 3 — Péndulo 2**
 
-- Carlos
-- Víctor
-- Joel
-
-Universidad Iberoamericana Ciudad de México  
-Asignatura: Control Inteligente  
-Periodo: Otoño 2026
+- Carlos Sebastián Ortega Hernández
+- Víctor Manuel Olvera de la Cruz
+- Joel Alberto RioValle 
