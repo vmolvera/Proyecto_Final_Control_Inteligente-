@@ -6,7 +6,7 @@ nav_order: 2
 
 # 1. Introducción
 
-El control de un **péndulo rotatorio de Furuta** plantea un desafío porque su dinámica es no lineal y el equilibrio en la vertical superior es inestable. Una pequeña desviación puede alejar al péndulo de esa posición, por lo que el controlador debe corregir su movimiento mientras regula la posición angular del brazo.
+El control de un **péndulo rotatorio de fruta** plantea un desafío porque su dinámica es no lineal y el equilibrio en la vertical superior es inestable. Una pequeña desviación puede alejar al péndulo de esa posición, por lo que el controlador debe corregir su movimiento mientras regula la posición angular del brazo.
 
 En este proyecto, el **Equipo 3** trabajó con la unidad **Péndulo 2** del **Quanser QUBE-Servo 3**. El motor acciona el brazo horizontal y el péndulo se mueve por acoplamiento dinámico con el brazo. Como el péndulo carece de un actuador propio, el sistema es subactuado.
 
@@ -26,7 +26,5 @@ El desarrollo del proyecto comprende las siguientes etapas:
 1. **Modelado de la planta.** Representación de la dinámica no lineal del brazo y del péndulo.
 2. **Diseño del controlador de referencia.** Linealización alrededor del equilibrio invertido y diseño del regulador cuadrático lineal (LQR).
 3. **Entrenamiento del agente de balance.** Definición del estado, las acciones de voltaje y la recompensa para entrenar la DQN en simulación.
-4. **Evaluación del balance.** Pruebas en MATLAB y Simulink y revisión de la respuesta observada en el equipo físico.
-5. **Diseño de la estrategia de arranque.** Definición de la región de captura y de la transición entre levantamiento y balance.
 
 El **LQR** proporciona una referencia para comparar el comportamiento de los controladores cerca del equilibrio invertido. Durante el balance se busca mantener $\alpha$ y $\theta$ cerca de cero, dentro de los límites de operación del equipo. La comparación entre simulación y planta física permite identificar hasta qué punto el comportamiento observado en el modelo se reproduce en el QUBE-Servo 3.
