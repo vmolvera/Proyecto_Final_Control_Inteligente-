@@ -6,7 +6,7 @@ nav_order: 7
 
 # 6. Resultados
 
-El DQN sostuvo el balance en los dos escenarios temporales de la prueba A1 en simulación. En el QUBE-Servo 3, el DQN de balance mantiene el péndulo en la posición invertida. El LQR mantuvo el péndulo invertido y sirvió como referencia experimental. Las siguientes pruebas permiten examinar qué parte del desempeño se observó en cada etapa.
+El DQN de balance recuperó la posición invertida en los dos ensayos A1 en simulación y mantuvo el péndulo invertido en el QUBE-Servo 3. El LQR sirvió como referencia experimental. El barrido paramétrico complementa estas pruebas al evaluar el desempeño del estabilizador ante variaciones de hasta ±2 % en el simulador.
 
 ## 6.1 Verificación de la política y resultados de simulación
 
@@ -49,15 +49,17 @@ El sistema inició en el equilibrio invertido. En $t=2$ s se añadió un increme
 
 Los valores de la tabla proceden de una reproducción numérica del lazo A1. Para medir la recuperación se identificó la entrada a la banda definida por $\lvert\alpha\rvert<3^\circ$ y $\lvert\theta\rvert<15^\circ$ a partir de la cual el sistema permaneció en ella hasta terminar la corrida.
 
+El incremento de velocidad produjo una excursión del brazo **13.80° mayor** que la desviación inicial, aunque ambos ensayos alcanzaron el mismo máximo de **6 V**. El péndulo presentó un pico angular menor en el ensayo perturbado, pero su RMS durante la corrida aumentó de **1.06° a 1.31°** y el retorno a la banda tomó **0.66 s**. El pico angular representa el alejamiento máximo de la vertical. El RMS incorpora el error de todo el registro y el tiempo de recuperación exige que el brazo y el péndulo vuelvan simultáneamente a sus bandas.
+
 ## 6.3 Comparación en el QUBE-Servo 3
 
 | Controlador | Observación en el laboratorio | Alcance de la evidencia |
 |---|---|---|
 | **LQR de referencia** | Mantuvo el péndulo en la posición invertida. | Referencia física de balance. |
 | **DQN de balance** | El DQN mantuvo el péndulo en la posición invertida en el QUBE-Servo 3. | Balance observado en el equipo físico. |
-| **Swing-up y balance** | La transición se documentó como parte del diseño del supervisor. | No se dispone de una serie verificable de capturas y tiempos de balance posterior con los dos agentes. |
+| **Levantamiento y balance** | El supervisor gestiona la transferencia entre el agente de *swing-up* y el estabilizador al entrar en la región de captura. | El resultado cuantitativo de captura y balance tras la conmutación queda pendiente. |
 
-La comparación física disponible es cualitativa. Sin registros sincronizados de $\theta$, $\alpha$, las velocidades estimadas y $V_m$ para ambos controladores bajo condiciones equivalentes, queda pendiente calcular diferencias de RMS o tiempo de recuperación en laboratorio. Los transitorios del observador, la saturación, los cambios discretos de voltaje y los retardos son hipótesis que requieren contrastarse con esas señales.
+El resultado experimental del DQN corresponde al **balance en la posición invertida**. En la grabación del equipo, el péndulo permanece cerca de la vertical durante el tramo final. La observación es cualitativa. Para comparar el tiempo de recuperación, el RMS angular y el esfuerzo de control del DQN y del LQR en condiciones equivalentes se requieren registros sincronizados de $\theta$, $\alpha$, las velocidades estimadas y $V_m$.
 
 ## 6.4 Análisis complementario de robustez en simulación
 {: #robustez-simulacion }
@@ -91,7 +93,18 @@ La simulación conservó la cuantización y la estimación de velocidades, con l
 | Amortiguamiento del péndulo $D_p$ | 71/81 | 69/81 |
 | Gravedad $g$ | 70/81 | 70/81 |
 
-El barrido individual produjo entre **74 y 75 éxitos** alrededor de la base del simulador y entre **69 y 71** alrededor del Cuadro 2. La diferencia entre los dos casos base fue de cinco éxitos, equivalente a **6.2 puntos porcentuales** en esta malla. En el ensayo conjunto se conservaron los mismos casos exitosos de cada referencia, con un ligero aumento del RMS del péndulo. El RMS de la tabla se calcula sobre los 5 s de cada episodio exitoso y luego se promedia entre dichos episodios. El recuento depende de las condiciones iniciales y del criterio de éxito.
+El barrido individual produjo entre **74 y 75 éxitos** alrededor de la base del simulador y entre **69 y 71** alrededor del Cuadro 2. En la variación conjunta se conservaron exactamente las mismas condiciones iniciales exitosas de cada referencia. El RMS angular aumentó **0.013°** en la base del simulador y **0.010°** en el Cuadro 2. Estos valores corresponden al promedio del RMS de cada episodio exitoso, calculado sobre sus 5 s.
+
+### Efecto de la condición inicial
+
+| Velocidad inicial del péndulo | Casos por grupo | Éxitos con la base del simulador | Éxitos con el Cuadro 2 |
+|---:|---:|---:|---:|
+| −2 rad/s | 27 | 23 | 19 |
+| 0 rad/s | 27 | 26 | 26 |
+| +2 rad/s | 27 | 25 | 24 |
+| **Total** | **81** | **74** | **69** |
+
+La tabla compara ambos casos sin variaciones adicionales. Los cinco estados iniciales que pasaron de éxito con la base del simulador a fallo con los valores del Cuadro 2 tenían $\lvert\alpha(0)\rvert=12^\circ$ y $\lvert\dot\alpha(0)\rvert=2$ rad/s. En los cinco, el ángulo y la velocidad tenían el mismo signo, de modo que el péndulo inicialmente se alejaba de la vertical invertida. El cambio de referencia redujo el éxito en **6.2 puntos porcentuales** dentro de la malla evaluada. La coincidencia entre éxito nominal y éxito con variaciones conjuntas se limita a los estados y perturbaciones ensayados.
 
 [Datos del barrido por escenario (CSV)]({{ '/assets/images/dqn-sensibilidad-2pct.csv' | relative_url }})
 
@@ -99,4 +112,4 @@ El barrido individual produjo entre **74 y 75 éxitos** alrededor de la base del
 
 El barrido usa el agente de balance ya entrenado alrededor de la base del simulador con aleatorización paramétrica. Al evaluar en el Cuadro 2 se sustituyeron los valores de sus parámetros dentro de la misma formulación dinámica. Para completar el ensayo formal de la asignatura falta evaluar un agente entrenado específicamente con los parámetros nominales del Cuadro 2 y conservar sus pesos durante las variaciones.
 
-Para extender la evaluación al *swing-up* se requieren pesos de levantamiento verificables y trazas del modo del supervisor. Los indicadores son la tasa y el tiempo de captura desde la posición colgante, la velocidad de llegada y la proporción de episodios que conservan el balance después de conmutar. La evidencia actual permite cuantificar la sensibilidad del **balance simulado**. La sensibilidad de la secuencia de dos agentes queda pendiente.
+Para cuantificar la robustez del *swing-up*, el ensayo debe iniciar con el péndulo colgante y registrar el instante en que el supervisor transfiere el control. Los indicadores son la proporción de episodios que alcanzan la región de captura, el tiempo hasta la captura, la velocidad de llegada y la proporción que conserva el balance después de conmutar. El barrido reportado cuantifica la robustez del estabilizador en simulación.
