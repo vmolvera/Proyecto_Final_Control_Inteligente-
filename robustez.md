@@ -4,6 +4,6 @@ title: Análisis de robustez
 nav_exclude: true
 search_exclude: true
 ---
-{% assign destination = '/dqn.html' | relative_url | append: '#robustez-simulacion' %}
+{% assign destination = '/resultados.html' | relative_url %}
 <meta http-equiv="refresh" content="0; url={{ destination }}">
-<p>La evaluación paramétrica se encuentra en <a href="{{ destination }}">Análisis de robustez en simulación</a>.</p>
+<p>Consulta la sección de <a href="{{ destination }}">Resultados</a>.</p>
