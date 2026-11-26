@@ -4,7 +4,7 @@ title: "6. Resultados"
 nav_order: 7
 ---
 
-# 6. Resultados de simulación y experimentales
+# 6. Resultados
 
 El DQN sostuvo el balance en los dos escenarios temporales de la prueba A1 en simulación. En el primer ensayo físico, el brazo osciló rápidamente y el péndulo perdió el equilibrio. El LQR mantuvo el péndulo invertido y sirvió como referencia experimental. Las siguientes pruebas permiten examinar qué parte del desempeño se observó en cada etapa.
 
