@@ -6,7 +6,7 @@ nav_order: 2
 
 # 1. Introducción
 
-El control de un **péndulo rotatorio de fruta** plantea un desafío porque su dinámica es no lineal y el equilibrio en la vertical superior es inestable. Una pequeña desviación puede alejar al péndulo de esa posición, por lo que el controlador debe corregir su movimiento mientras regula la posición angular del brazo.
+El control de un **péndulo rotatorio de Furuta** plantea un desafío porque su dinámica es no lineal y el equilibrio en la vertical superior es inestable. Una pequeña desviación puede alejar al péndulo de esa posición, por lo que el controlador debe corregir su movimiento mientras regula la posición angular del brazo.
 
 En este proyecto, el **Equipo 3** trabajó con la unidad **Péndulo 2** del **Quanser QUBE-Servo 3**. El motor acciona el brazo horizontal y el péndulo se mueve por acoplamiento dinámico con el brazo. Como el péndulo carece de un actuador propio, el sistema es subactuado.
 
