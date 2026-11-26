@@ -20,8 +20,6 @@ En cada decisión, el agente recibe una observación, elige un voltaje discreto 
 | Recompensa | Favorece el equilibrio y penaliza el error angular, las velocidades y el esfuerzo de control. | El diseño busca premiar el avance hacia la vertical y la captura a baja velocidad, penalizando la excursión del brazo y el esfuerzo. Los coeficientes de una política final entrenada no están verificados. |
 | Término | Fallo si el péndulo supera 25°, el brazo supera 120° en valor absoluto o el estado deja de ser finito. El episodio se trunca a los 5 s. | La captura habilita la transición a balance. Para evaluar el levantamiento por separado, se distingue la captura válida del vencimiento del horizonte o de la salida de los límites del simulador. Los límites de entrenamiento finales están pendientes de confirmar. |
 
-Los límites de esta tabla corresponden a la formulación de simulación. El habilitador del montaje físico de balance es parte de la implementación descrita en la [sección 4]({{ '/implementacion.html' | relative_url }}).
-
 ### Observación, acción y transición
 
 El índice de acción se interpreta mediante una tabla fija de voltajes. Los niveles de balance tienen mayor resolución cerca de cero, donde la política necesita realizar correcciones pequeñas, y conservan niveles de mayor amplitud para responder a desviaciones más grandes en simulación. En cada decisión se mantiene el voltaje durante cinco pasos de integración. La transición se guarda con la observación siguiente y con el indicador que distingue una falla del término por tiempo.
@@ -180,4 +178,4 @@ $$
 
 La condición de salida angular de balance se plantea en $\lvert\alpha\rvert>15^\circ$ en el entorno virtual. Por ejemplo, con $\alpha=5^\circ$, $\theta=8^\circ$ y velocidades estimadas de $0.9$ rad/s para el péndulo y $0.3$ rad/s para el brazo, se cumplen las condiciones de entrada. Si se conserva esa geometría pero la velocidad del péndulo aumenta a $1.5$ rad/s, la maniobra continúa en levantamiento. La conmutación depende del estado medido y estimado en el instante de evaluación.
 
-Para interpretar una corrida conjunta se distinguen el tiempo hasta la captura, la velocidad de llegada y el tiempo de balance posterior. Registrar el modo y el voltaje en cada muestra permite asociar una falla al levantamiento, a la transferencia o a la estabilización. La secuencia conjunta queda pendiente de validación física.
+Para interpretar una corrida conjunta se distinguen el tiempo hasta la captura, la velocidad de llegada y el tiempo de balance posterior. Registrar el modo y el voltaje en cada muestra permite asociar una falla al levantamiento, a la transferencia o a la estabilización.
