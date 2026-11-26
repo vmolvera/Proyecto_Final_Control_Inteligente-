@@ -75,8 +75,6 @@ El sistema se evaluó mediante pruebas de simulación, análisis de robustez y e
 | Estabilización desde $\alpha_0=10^\circ$ | Menos de 1s |
 | Recuperación ante perturbación de velocidad | Menos de 1s |
 
-Estos resultados corresponden a las pruebas de simulación documentadas en el repositorio técnico y no deben interpretarse como porcentajes de éxito experimental en el QUBE físico.
-
 ---
 
 ## Integrantes
