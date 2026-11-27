@@ -19,5 +19,3 @@ nav_order: 10
 - **QUARC.** Ejecución del controlador en tiempo real en el equipo de laboratorio. [Documentación](https://docs.quanser.com/quarc/documentation/quarc_tab.html).
 
 - **Quanser QUBE-Servo 3.** Plataforma de laboratorio con módulo de péndulo rotatorio y encoders para medir las posiciones del brazo y del péndulo. [Ficha oficial](https://www.quanser.com/products/qube-servo-3/).
-
-[Código Fuente]({{ '/codigo.html' | relative_url }}) · [Resultados]({{ '/resultados.html' | relative_url }})
