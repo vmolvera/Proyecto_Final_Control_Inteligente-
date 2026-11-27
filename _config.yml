@@ -21,8 +21,8 @@ baseurl: "/Proyecto_Final_Control_Inteligente-"
 
 # Enlaces del menu superior
 aux_links:
-  "Código del equipo":
-    - "https://github.com/sebastiux/cubeservoquansecontrol"
+  "Código en GitHub":
+    - "https://github.com/vmolvera/Proyecto_Final_Control_Inteligente-/tree/main/codigo_fuente"
   "Repositorio de entrega":
     - "https://github.com/vmolvera/Proyecto_Final_Control_Inteligente-"
 
