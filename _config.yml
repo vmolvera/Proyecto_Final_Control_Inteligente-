@@ -28,3 +28,10 @@ aux_links:
 
 aux_links_new_tab: true
 gh_edit_link: false
+
+# Mantener los README de código fuera de la navegación del portafolio
+defaults:
+  - scope:
+      path: "codigo_fuente"
+    values:
+      nav_exclude: true
