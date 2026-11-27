@@ -58,14 +58,3 @@ cd python
 python -m pip install -r requirements.txt
 python train_dqn.py --seed 0 --out ../models/dqn_qube_reentrenado
 ```
-
-## 7.4 Datos y alcance del código publicado
-
-- [Datos del barrido de robustez de ±2 % por escenario (CSV)]({{ '/assets/images/dqn-sensibilidad-2pct.csv' | relative_url }})
-- [Gráficas A1, resultados físicos y criterios del barrido]({{ '/resultados.html' | relative_url }})
-- [Implementación en Simulink y estimación de velocidades]({{ '/implementacion.html' | relative_url }})
-- [Diseño de los agentes DQN y lógica de conmutación]({{ '/dqn.html' | relative_url }})
-
-La descarga contiene la cadena de ejecución del **estabilizador DQN**. La documentación de **Agentes DQN** describe el levantamiento desde la posición colgante y la lógica de captura. Para ejecutar la secuencia de dos agentes se necesitan además los pesos de *swing-up* y el modelo con el supervisor integrado.
-
-[Repositorio del portafolio del proyecto final](https://github.com/vmolvera/Proyecto_Final_Control_Inteligente-)
