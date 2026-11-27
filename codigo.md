@@ -1,10 +1,10 @@
 ---
 layout: default
-title: "Código Fuente"
+title: "7. Código Fuente"
 nav_order: 8
 ---
 
-# Código Fuente
+# 7. Código Fuente
 
 El código del proyecto permite ejecutar la política DQN de balance con los pesos entrenados, reproducir las pruebas del modelo no lineal y generar el modelo de Simulink para el QUBE-Servo 3. La guía sigue el orden de trabajo del proyecto, desde la comprobación de la red hasta su integración con el equipo físico.
 
