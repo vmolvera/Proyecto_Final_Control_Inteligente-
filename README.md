@@ -2,9 +2,9 @@
 
 Portafolio Jekyll/Just the Docs para documentar el control inteligente del péndulo invertido Quanser QUBE-Servo 3, conservando la identidad visual y navegación de la Evaluación I.
 
-**Sitio (tras publicarlo):** https://vmolvera.github.io/Proyecto_Final_Control_Inteligente/
+[Portafolio publicado](https://vmolvera.github.io/Proyecto_Final_Control_Inteligente-/)
 
-**Código técnico:** https://github.com/sebastiux/cubeservoquansecontrol
+[Código Fuente del proyecto](codigo_fuente/)
 
 ## Publicación
 
