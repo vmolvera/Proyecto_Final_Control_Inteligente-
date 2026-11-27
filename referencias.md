@@ -8,8 +8,6 @@ nav_order: 10
 
 - **López González, A. y Caballero Mora, J. A.** *Proyecto Final – Control Inteligente*. Universidad Iberoamericana Ciudad de México, 29 de octubre de 2026. Enunciado del proyecto y parámetros nominales del Cuadro 2.
 
-- **Cazzolato, B. S. y Prime, Z. (2011).** *On the Dynamics of the Furuta Pendulum*. Referencia para el modelo dinámico del péndulo rotatorio. [Artículo](https://doi.org/10.1155/2011/528341).
-
 - **Mnih, V. et al. (2015).** *Human-level control through deep reinforcement learning*. Trabajo original de DQN. [Artículo](https://doi.org/10.1038/nature14236).
 
 - **van Hasselt, H., Guez, A. y Silver, D. (2016).** *Deep Reinforcement Learning with Double Q-Learning*. Referencia para el entrenamiento del agente de balance. [Artículo](https://doi.org/10.1609/aaai.v30i1.10295).
